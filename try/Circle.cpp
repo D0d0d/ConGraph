@@ -1,16 +1,7 @@
 #include "Circle.h"
 void Circle::setR(int r)
 {
-	for (int i = 0; i < this->R * 2 + 1; i++) {
-		delete[] this->a[i];
-	}
-	delete[] this->a;
-
 	this->R = r;
-	this->a = new int*[this->R * 2 + 1];
-	for (int i = 0; i < R * 2 + 1; i++) {
-		this->a[i] = new int[R * 2 + 1]();
-	}
 	this->x0 = this->R; this->y0 = this->R;
 }
 int Circle::getR()
@@ -20,32 +11,17 @@ int Circle::getR()
 Circle::Circle()
 {
 	this->R = 2;
-	this->a = new int*[this->R * 2 + 1];
-	for (int i = 0; i < R * 2 + 1; i++) {
-		this->a[i] = new int[R * 2 + 1]();
-	}
 	this->x0 = this->R; this->y0 = this->R;
 }
 
 Circle::Circle(int r)
 {
 	this->R = r;
-	this->a = new int*[this->R * 2 + 1];
-	for (int i = 0; i < R * 2 + 1; i++) {
-		this->a[i] = new int[R * 2 + 1]();
-	}
 	this->x0 = this->R; this->y0 = this->R;
 }
 
-Circle::~Circle()
-{
-	for (int i = 0; i < R*2+1; i++)
-		delete[] this->a[i];
-	delete[] this->a;
-}
 
-
-int** Circle::getCirlce()
+std::vector<std::pair<int, int>> Circle::getCircle()
 {
 	this->buildCircle();
 	return this->a;
@@ -57,14 +33,14 @@ void Circle::buildCircle()
 
 	int del = 2 * (1 - this->R);  // 1 - 2 * R;
 	while (y >= x) {
-		a[this->x0 + x][this->y0 + y] = 1;
-		a[this->x0 + y][this->y0 + x] = 1;    //
-		a[this->x0 - x][this->y0 + y] = 1;
-		a[this->x0 - y][this->y0 + x] = 1;    //
-		a[this->x0 + x][this->y0 - y] = 1;
-		a[this->x0 + y][this->y0 - x] = 1;    //
-		a[this->x0 - x][this->y0 - y] = 1;
-		a[this->x0 - y][this->y0 - x] = 1;    //
+		a.push_back({this->x0 + x,this->y0 + y});
+		a.push_back({ this->x0 + y,this->y0 + x });    //
+		a.push_back({ this->x0 - x,this->y0 + y });
+		a.push_back({ this->x0 - y,this->y0 + x });    //
+		a.push_back({ this->x0 + x,this->y0 - y });
+		a.push_back({ this->x0 + y,this->y0 - x });    //
+		a.push_back({ this->x0 - x,this->y0 - y });
+		a.push_back({ this->x0 - y,this->y0 - x });    //
 
 		if (del < 0) {
 			int er = 2 * (del + y) - 1;

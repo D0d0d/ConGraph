@@ -1,9 +1,10 @@
 #pragma once
+#include <vector>
 class Circle
 {
 private:
 	int R;
-	int** a;
+	std::vector<std::pair<int, int>> a;
 	int x0, y0; // центр окружности 
 	void buildCircle();
 public:
@@ -11,7 +12,6 @@ public:
 	int getR();
 	Circle();
 	Circle(int r);
-	~Circle();
-	int** getCirlce();
+	std::vector<std::pair<int,int>> getCircle();
 };
 
