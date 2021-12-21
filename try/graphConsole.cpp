@@ -79,12 +79,13 @@ void graphConsole::showScreen()
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 			for (int i = 0; i < Width; i++) {
 				for (int j = 0; j < Height; j++) {
+					if (m[i][j].ch != "") {
+						SetConsoleTextAttribute(handle, m[i][j].color_b | m[i][j].color_f);
 
-					SetConsoleTextAttribute(handle, m[i][j].color_b | m[i][j].color_f);
-					
-					setCursorPosition(i * 2, j);
-					std::cout << m[i][j].ch;
-					SetConsoleTextAttribute(handle, clrblck); 
+						setCursorPosition(i * 2, j);
+						std::cout << m[i][j].ch;
+						SetConsoleTextAttribute(handle, clrblck);
+					}
 				}
 			}
 			SetConsoleTextAttribute(handle, clrblck);

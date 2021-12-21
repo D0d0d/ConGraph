@@ -32,7 +32,7 @@ int main()
 			GrCon.setP({ 5 + i,5 + 4 - i }, { "[]",ForePurple,BackPurple }, C.getCircle());
 
 			GrCon.showScreen();
-			Sleep(2);
+			Sleep(20);
 
 		}
 		GrCon.setP({ 15,10 }, { "[]",ForeBlack,BackBlack }, C.getCircle());

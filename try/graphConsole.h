@@ -47,7 +47,7 @@ enum colors_foreground
 	ForeYellow = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY
 };
 struct Dot {
-	std::string ch;
+	std::string ch="";
 	colors_foreground color_f;
 	colors_background color_b;
 };
