@@ -10,10 +10,29 @@ void graphConsole::setWinScale() {
 graphConsole::graphConsole()
 {
 	setWinScale();
-	this->m = new int*[this->Width];
+	this->m = new Dot*[this->Width];
 	for (int i = 0; i < this->Width; i++) {
-		this->m[i] = new int[this->Height]();
+		this->m[i] = new Dot[this->Height]();
 	}
+}
+
+graphConsole::graphConsole(bool fullscr)
+{
+	if (fullscr) {
+		SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, 0);
+		graphConsole();
+	}
+	else {
+		graphConsole();
+	}
+}
+
+graphConsole::~graphConsole()
+{
+	for (int i = 0; i < this->Width; i++) {
+		delete[] this->m[i];
+	}
+	delete[] this->m;
 }
 
 void graphConsole::cls()
@@ -57,20 +76,18 @@ void graphConsole::setCursorPosition(int x, int y)
 
 void graphConsole::showScreen()
 {
-	palette[0] = "  "; palette[1] = "[]";
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 			for (int i = 0; i < Width; i++) {
 				for (int j = 0; j < Height; j++) {
 
-					if (m[i][j] == 1) {
-						SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_RED | BACKGROUND_BLUE | FOREGROUND_INTENSITY | BACKGROUND_INTENSITY /*| FOREGROUND_GREEN | FOREGROUND_GREEN*/);  // комбинации цветов FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE
-					};
-						setCursorPosition(i*2, j);
-						std::cout << palette[m[i][j]];
-					if (m[i][j] == 1) { SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE); }
+					SetConsoleTextAttribute(handle, m[i][j].color_b | m[i][j].color_f);
+					
+					setCursorPosition(i * 2, j);
+					std::cout << m[i][j].ch;
+					SetConsoleTextAttribute(handle, clrblck); 
 				}
 			}
-			SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+			SetConsoleTextAttribute(handle, clrblck);
 
 }
 
@@ -82,21 +99,21 @@ void graphConsole::setMatrix()
 	}
 	delete[] this->m;
 	setWinScale();
-	this->m = new int*[this->Width];
+	this->m = new Dot*[this->Width];
 	for (int i = 0; i < this->Width; i++) {
-		this->m[i] = new int[this->Height]();
+		this->m[i] = new Dot[this->Height]();
 	}
 }
 
-void graphConsole::setP(std::pair<int, int> P, int p)
+void graphConsole::setP(std::pair<int, int> cors, Dot p)
 {
-	m[P.first][P.second] = p;
+	m[cors.first][cors.second] = p;
 }
 
-void graphConsole::setP(std::vector<std::pair<int, int>> P, int p, std::pair<int, int> cor)
+void graphConsole::setP(std::pair<int, int> cors, Dot p, std::vector<std::pair<int, int>> P)
 {
 	for (std::pair<int, int> i : P)
 	{
-		m[i.first+cor.first][i.second+cor.second] = p;
+		m[i.first+cors.first][i.second+cors.second] = p;
 	}
 }
