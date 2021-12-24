@@ -118,3 +118,11 @@ void graphConsole::setP(std::pair<int, int> cors, Dot p, std::vector<std::pair<i
 		m[i.first+cors.first][i.second+cors.second] = p;
 	}
 }
+
+void graphConsole::setP(std::pair<int, int> cors, std::vector<Dot> p, std::vector<std::pair<int, int>> P)
+{
+	for (int i=0; i<P.size();i++)
+	{
+		m[P[i].first + cors.first][P[i].second + cors.second] = p[i];
+	}
+}

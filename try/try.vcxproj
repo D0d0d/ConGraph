@@ -153,12 +153,16 @@
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Ellipse.cpp" />
+    <ClCompile Include="figure.cpp" />
     <ClCompile Include="graphConsole.cpp" />
+    <ClCompile Include="marioPic.cpp" />
     <ClCompile Include="try.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="Dot.h" />
     <ClInclude Include="Ellipse.h" />
+    <ClInclude Include="figure.h" />
     <ClInclude Include="graphConsole.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
