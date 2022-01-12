@@ -19,6 +19,7 @@ int main()
 	GrCon.cls();
 	GrCon.setMatrix();
 	Figure F;
+
 	F.makeLine({ 3,0 }, { 8,0 }, { "[]",ForeRed,BackRed }); //LightRed
 	F.makeLine({ 2,1 }, { 11,1 }, { "[]",ForeRed,BackRed });
 
