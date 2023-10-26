@@ -1,4 +1,4 @@
 # ConGraph
-Basic experiment with graphic in console.
+Basic experiment with raster graphic in console.
 
 
